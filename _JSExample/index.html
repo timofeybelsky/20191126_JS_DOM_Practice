@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+</head>
+<body>
+
+<ul id="usersList">
+</ul>
+
+<script>
+    'use strict';
+
+    const users = [
+        {
+            id: 1,
+            name: "Стас",
+            surname: "Михайлов",
+            imageSrc: "https://24smi.org/public/media/celebrity/2019/01/29/eblteapobq9j-stas-mikhailov.jpg",
+        },
+        {
+            id: 2,
+            name: "User2",
+            surname: "Usersurname1",
+
+        },
+        {
+            id: 3,
+            name: "Алла",
+            surname: "Пугачева",
+            imageSrc: "https://kievpravda.com/media/images/46128/raw/1d3d39c47e7987682e5bd74ad4732812.jpg",
+        },
+        {
+            id: 4,
+            name: "Дима",
+            surname: "Билан",
+            imageSrc: "https://s3.cdn.teleprogramma.pro/wp-content/uploads/2019/02/3234a90b1ebc1206b4f2f0557c510bff.jpg",
+        },
+
+    ];
+
+    const userListElem = document.getElementById("usersList");
+
+    appendUsersListItems(userListElem, users);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function appendUsersListItems(usersListElem, users) {
+        users.forEach(
+            user => {
+                usersListElem.append(createUserListItemElem(user));
+            }
+        );
+    }
+
+    function createUserListItemElem(user) {
+
+        const userListItemElem = document.createElement("li");
+
+        userListItemElem.append( createUserCardElem(user) );
+
+        return userListItemElem;
+    }
+
+    function createUserCardElem(user) {
+        const userCardWrapperElem = document.createElement("div");
+
+        userCardWrapperElem.classList.add('userCardWrapper');
+
+        userCardWrapperElem.append(createUserPictureElem(user));
+        userCardWrapperElem.append(createUserFullNameElem(user));
+
+        return userCardWrapperElem
+    }
+
+    function getUserPictureElem({imageSrc}) {
+        const userPictureElem = document.createElement('img');
+        userPictureElem.setAttribute('src', imageSrc ? imageSrc : "./assets/icons/user_icon.png");
+        userPictureElem.setAttribute("alt", "user picture");
+
+        return  userPictureElem;
+    }
+
+    function createUserPictureElem(user) {
+        const userPictureContainerElem = document.createElement("div");
+        userPictureContainerElem.classList.add('userPictureContainer');
+
+        userPictureContainerElem.append( getUserPictureElem(user) );
+
+        return userPictureContainerElem;
+    }
+
+    function createUserFullNameElem({name, surname}) {
+        const userFullNameElem = document.createElement("div");
+
+        userFullNameElem.innerText = `${name} ${surname}`;
+
+        return userFullNameElem;
+    }
+
+</script>
+</body>
+</html>

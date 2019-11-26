@@ -1,0 +1,38 @@
+@import "reset.css";
+
+
+.userCardWrapper {
+
+    display: flex;
+    align-items: center;
+
+    background-color: gray;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border-radius: 10px;
+
+    margin: 10px;
+
+}
+
+.userPictureContainer {
+    position: relative;
+    overflow: hidden;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+
+}
+
+.userPictureContainer > img {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+    object-fit: cover;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+}
