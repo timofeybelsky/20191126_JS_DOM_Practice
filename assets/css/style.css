@@ -129,3 +129,10 @@ USER CARD
 .userContactsContainer > a > img {
     height: 20px;
 }
+
+.deleteButton{
+
+    margin: 0 auto;
+    width: 40px;
+    cursor: pointer;
+}

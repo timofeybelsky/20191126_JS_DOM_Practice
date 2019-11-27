@@ -1,30 +1,18 @@
 const SOCIAL_NETWORKS = Object.freeze({
 
-    FACEBOOK: "facebook", {
-        title: "FACEBOOK",
-        icon: "./assets/images/icons/socialNetworks/facebook.png",
-    },
-    TWITTER: {
-        title: "TWITTER",
-        icon: "./assets/images/icons/socialNetworks/twitter.png",
-    },
-    SKYPE: {
-        title: "SKYPE",
-        icon: "./assets/images/icons/socialNetworks/skype.png",
-    },
-    GOOGLE_PLUS: {
-        title: "GOOGLE_PLUS",
-        icon: "./assets/images/icons/socialNetworks/google-plus.png",
-    },
+    FACEBOOK: "FACEBOOK",
+    TWITTER: "TWITTER",
+    SKYPE: "SKYPE",
+    GOOGLE_PLUS: "GOOGLE_PLUS",
 
 });
 
-
+/*
 const DOMAIN_ICONS = new Map();
 
 DOMAIN_ICONS.set(SOCIAL_NETWORKS.FACEBOOK, "./assets/images/icons/socialNetworks/facebook.png");
 
-/*DOMAIN_ICONS.get(user.contacts[0].domainName);*/
+DOMAIN_ICONS.get(user.contacts[0].domainName);*/
 
 const users = [
     {
@@ -33,30 +21,26 @@ const users = [
         surname: "Петросян",
         description: "extremely large text...",
         imageSrc: "https://pickaface.net/gallery/avatar/acrovin559439058dc7f.png",
-        contacts: [
+        contacts: /*[
             {
                 domainName: "facebook",
                 href: "#",
             },
-        ] /* [
+        ]*/ [
             {
-                name: SOCIAL_NETWORKS.FACEBOOK.title,
+                name: SOCIAL_NETWORKS.FACEBOOK,
                 href: "#",
-                iconSrc: SOCIAL_NETWORKS.FACEBOOK.icon,
-            },{
-                name: SOCIAL_NETWORKS.TWITTER.title,
-                href: "#",
-                iconSrc: SOCIAL_NETWORKS.TWITTER.icon,
             }, {
-                name: SOCIAL_NETWORKS.SKYPE.title,
+                name: SOCIAL_NETWORKS.TWITTER,
                 href: "#",
-                iconSrc: SOCIAL_NETWORKS.SKYPE.icon,
-            },{
-                name: SOCIAL_NETWORKS.GOOGLE_PLUS.title,
+            }, {
+                name: SOCIAL_NETWORKS.SKYPE,
                 href: "#",
-                iconSrc: SOCIAL_NETWORKS.GOOGLE_PLUS.icon,
+            }, {
+                name: SOCIAL_NETWORKS.GOOGLE_PLUS,
+                href: "#",
             },
-        ],*/
+        ],
     },
     {
         id: 2,
@@ -66,21 +50,17 @@ const users = [
         imageSrc: "https://pickaface.net/gallery/avatar/unr_myself_190918_1012_9lyr3j.png",
         contacts: [
             {
-                name: SOCIAL_NETWORKS.FACEBOOK.title,
+                name: SOCIAL_NETWORKS.FACEBOOK,
                 href: "#",
-                iconSrc: SOCIAL_NETWORKS.FACEBOOK.icon,
             },{
-                name: SOCIAL_NETWORKS.TWITTER.title,
+                name: SOCIAL_NETWORKS.TWITTER,
                 href: "#",
-                iconSrc: SOCIAL_NETWORKS.TWITTER.icon,
             }, {
-                name: SOCIAL_NETWORKS.SKYPE.title,
+                name: SOCIAL_NETWORKS.SKYPE,
                 href: "#",
-                iconSrc: SOCIAL_NETWORKS.SKYPE.icon,
             },{
-                name: SOCIAL_NETWORKS.GOOGLE_PLUS.title,
+                name: SOCIAL_NETWORKS.GOOGLE_PLUS,
                 href: "#",
-                iconSrc: SOCIAL_NETWORKS.GOOGLE_PLUS.icon,
             },
         ],
     },
@@ -181,6 +161,7 @@ function appendUsersListItems(usersListElem, users) {
 function createUserListItemElem(user) {
 
     const userListItemElem = document.createElement("li");
+    userListItemElem.setAttribute("id", user.id);
 
     userListItemElem.append( createUserCardElem(user) );
 
@@ -198,8 +179,9 @@ function createUserCardElem(user) {
     userCardWrapperElem.append(createUserPictureElem(user));
     userCardWrapperElem.append(createUserFullNameElem(user));
     userCardWrapperElem.append(createUserDescriptionElem(user));
+    userCardWrapperElem.append(createDeleteButtonElem(user));
 
-    userCardWrapperElem.append(createUserContactsContainer(user));
+    // userCardWrapperElem.append(createUserContactsContainer(user));
 
     return userCardWrapperElem;
 }
@@ -213,14 +195,14 @@ function createUserDescriptionElem({description}) {
     return userDescriptionElem;
 }
 
-function createUserContactsContainer(user) {
+/*function createUserContactsContainer(user) {
     const userContactsContainer = document.createElement("div");
     userContactsContainer.classList.add('userContactsContainer');
 
     userContactsContainer.append( createUserContactsLinkElem(user) );
 
     return userContactsContainer;
-}
+}*/
 
 /*
 
@@ -234,22 +216,22 @@ function appendUsersContactsItems(usersListElem, users) {
 
 */
 
-function createUserContactsLinkElem(user) {
+/*function createUserContactsLinkElem(user) {
     const userContactsLinkElem = document.createElement("a");
     userContactsLinkElem.setAttribute('href','#');
 
     userContactsLinkElem.append( getUserContactsElem(user) );
 
     return userContactsLinkElem;
-}
+}*/
 
-function getUserContactsElem({contacts}) {
+/*function getUserContactsElem({contacts}) {
     const userContactsElem = document.createElement('img');
     userContactsElem.setAttribute('src', contacts.iconSrc);
     userContactsElem.setAttribute('alt', contacts.name);
 
     return userContactsElem;
-}
+}*/
 
 function getUserPictureElem({imageSrc}) {
     const userPictureElem = document.createElement('img');
@@ -276,4 +258,19 @@ function createUserFullNameElem({name, surname}) {
     userFullNameElem.innerText = `${name} ${surname}`;
 
     return userFullNameElem;
+}
+
+function createDeleteButtonElem({id}) {
+    const deleteButtonElem = document.createElement('img');
+    deleteButtonElem.classList.add('deleteButton');
+    deleteButtonElem.setAttribute('src', './assets/images/icons/cross.png');
+    deleteButtonElem.setAttribute('alt', 'DELETE');
+
+    deleteButtonElem.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const userListItemElem = document.getElementById(id);
+        userListItemElem.remove();
+    });
+
+    return deleteButtonElem;
 }
